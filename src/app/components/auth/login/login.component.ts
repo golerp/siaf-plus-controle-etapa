@@ -30,12 +30,12 @@ export class LoginComponent {
 
     login() {
         this.authService.login(this.email, this.senha).subscribe({
-            next: (response) => {
+            next: (response: any) => {
                 localStorage.setItem('authToken', response.token); // Salva o token
                 localStorage.setItem('user_id', response.id);
                 this.router.navigate(['/dashboard']); // Redireciona para o dashboard
             },
-            error: (error) => {
+            error: (error: any) => {
                 this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Usuário ou senha inválidos' });
             }
         });

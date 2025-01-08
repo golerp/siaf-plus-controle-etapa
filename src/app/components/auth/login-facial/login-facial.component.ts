@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { BiometriaService } from 'src/app/service/integracao/biometria.service';
+import { BiometriaService } from '../../../service/biometria.service';
 import * as faceapi from '@vladmandic/face-api';
 import { MessageService } from 'primeng/api';
 
@@ -96,7 +96,8 @@ export class LoginFacialComponent implements OnInit {
   // Converte base64 para File
   private base64ToFile(base64Image: string, filename: string): File {
     const arr = base64Image.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
+    const match = arr[0].match(/:(.*?);/);
+    const mime = match ? match[1] : '';
     const bstr = atob(arr[1]);
     let n = bstr.length;
     const u8arr = new Uint8Array(n);
@@ -132,7 +133,7 @@ export class LoginFacialComponent implements OnInit {
       } else {
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: response.message });
       }
-    } catch (error) {
+    } catch (error: any) {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.message });
     }
   }

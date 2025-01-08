@@ -22,7 +22,7 @@ import { AppLayoutComponent } from "./app.layout.component";
     declarations: [
         AppMenuitemComponent,
         AppTopBarComponent,
-        //AppFooterComponent,
+        AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
