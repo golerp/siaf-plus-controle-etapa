@@ -1,40 +1,64 @@
-<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
-    <div class="flex flex-column align-items-center justify-content-center">
-        <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
-            <div class="w-full surface-card py-5 px-5 sm:px-8" style="border-radius:53px">
-                <div class="text-center mb-5">
-                    <img src="assets/images/coluna.png" alt="Image" height="100" class="mb-3">
-                    <div class="text-900 text-3xl font-medium mb-3">Bem-vindo!</div>
-                    <span class="text-600 font-medium">Faça o Login para continuar</span>
+<div class="login-background surface-ground flex align-items-center bg-color justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="container-fluid flex flex-column align-items-center justify-content-center">
+        <div class="flex justify-content-center align-items-center mb-5 pt-1">
+            <img src="assets/images/logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="d-none d-sm-flex justify-content-center align-items-center mb-4 text-center">
+            <h1 class="text-white" style="font-weight: bold; font-size: 5rem;">GOLERP</h1>
+        </div>
+
+        <div class="d-flex flex-wrap d-sm-none justify-content-center align-items-center mb-4 text-center">
+            <h1 class="text-white" style="font-weight: bold;">GOLERP</h1>
+        </div>
+
+
+        <div class="d-flex flex-wrap col-md-3 pt-1 surface-card justify-content-center align-items-center"
+            style="border-top-left-radius: 30px; border-top-right-radius: 30px; background-color: rgba(241, 241, 250, 1) !important;">
+            
+            <div class="container py-5 px-5 justify-content-between flex flex-column pt-3">
+                <div class="input-container">
+                    <i class="pi pi-envelope"></i>
+                    <input id="email1" [(ngModel)]="email" type="text" placeholder="Email" pInputText
+                    class="w-full" style="padding:1rem; border-radius: 10px;">
                 </div>
 
-                <div>
-                    <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="email1" [(ngModel)]="email" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                <div class="input-container">
+                    <i class="pi pi-lock"></i>
 
-                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Senha</label>
                     <p-password id="password1" 
                         [(ngModel)]="senha" 
-                        placeholder="Password" 
+                        placeholder="Senha" 
+                        [toggleMask]="true"
+                        weakLabel="Simples" 
+                        mediumLabel="Média" 
+                        strongLabel="Excelente"
+                        styleClass="mb-2 mt-3 w-full md:w-35rem d-none d-sm-flex" 
+                        inputStyleClass="w-full p-3 md:w-35rem">
+                    </p-password>
+    
+                    <p-password id="password1" 
+                        [(ngModel)]="senha" 
+                        placeholder="Senha" 
                         [toggleMask]="true" 
                         weakLabel="Simples" 
                         mediumLabel="Média" 
                         strongLabel="Excelente" 
-                        styleClass="mb-5 w-full md:w-30rem mb-5" 
-                        inputStyleClass="w-full p-3 md:w-30rem">
+                        styleClass="mb-2 mt-3 w-full md:w-30rem d-sm-none d-flex" 
+                        inputStyleClass="w-full p-3 md:w-30rem rounded-3">
                     </p-password>
+                </div>
 
-                    <div class="flex align-items-center justify-content-between mb-5 gap-5">
-                        <div class="flex align-items-center">
-                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
-                            <label for="rememberme1">Lembrar email</label>
-                        </div>
-                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Esqueceu a senha?</a>
-                    </div>
-                    <button pButton pRipple label="Entrar" class="w-full p-3 text-xl" (click)="login()"></button>
-                    <a class="flex align-items-center justify-content-center pt-3 font-medium no-underline ml-2 text-right cursor-pointer" 
-                    (click)="loginFacial()"
-                    style="color: var(--primary-color)">Login Facial</a>
+                <button pButton pRipple label="Acessar" style="border-radius: 10px; color: var(--primary-color);"
+                    class="text-white w-full p-2 text-xl mt-2" (click)="login()"></button>
+
+                <a class="flex align-items-center justify-content-center mb-7 pt-1 font-medium no-underline ml-2 text-right cursor-pointer"
+                    (click)="loginFacial()" style="color: var(--primary-color)">Login Facial</a>
+
+                <div class="flex align-items-center justify-content-center mt-5 text-center">
+                    <small>
+                        Adsoft Gestão Empresarial - v1.0.0
+                        <p>&copy; 2018. TODOS OS DIREITOS RESERVADOS.</p>
+                    </small>
                 </div>
             </div>
         </div>
