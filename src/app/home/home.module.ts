@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DashboardComponent } from './dashboard.component';
+import { HomeComponent } from './home.component';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { DashboardsRoutingModule } from './dashboard-routing.module';
+import { HomeRoutingModule } from './home-routing.module';
+import { StatusComponent } from '../components/status/status.component';
 
 @NgModule({
     imports: [
@@ -20,8 +21,8 @@ import { DashboardsRoutingModule } from './dashboard-routing.module';
         StyleClassModule,
         PanelMenuModule,
         ButtonModule,
-        DashboardsRoutingModule
+        HomeRoutingModule
     ],
-    declarations: [DashboardComponent]
+    declarations: [HomeComponent, StatusComponent]
 })
-export class DashboardModule { }
+export class HomeModule { }

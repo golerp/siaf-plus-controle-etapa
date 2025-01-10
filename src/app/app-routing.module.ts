@@ -15,7 +15,7 @@ import { AuthGuard } from './guard/auth.guard';
         path: '', component: AppLayoutComponent,
         // canActivate: [authGuard], // Protege as rotas
         children: [
-            { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+            { path: 'inicio', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
         ]
     },
       { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) }
