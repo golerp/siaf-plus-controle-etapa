@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from "./layout/app.layout.component";
 import { AuthGuard } from './guard/auth.guard';
-
+import { NotfoundComponent } from './notfound/notfound.component';
 @NgModule({
   imports: [
     RouterModule.forRoot([
@@ -12,13 +12,16 @@ import { AuthGuard } from './guard/auth.guard';
         pathMatch: 'full',
       },
       {
-        path: '', component: AppLayoutComponent,
+        path: 'inicio', component: AppLayoutComponent,
         // canActivate: [authGuard], // Protege as rotas
         children: [
-            { path: 'inicio', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+            { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
         ]
-    },
-      { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) }
+      },
+      { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
+      { path: '404', component: NotfoundComponent },
+      { path: '**', redirectTo: '/404' },
+
     ],{ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]

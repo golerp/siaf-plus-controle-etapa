@@ -1,45 +1,30 @@
-<div class="grid pb-0 pt-2 d-none d-sm-flex justify-content-center">
-    <div class="lg:col-3 xl:col-3 pr-5 pl-5">
-        <div class="card" style="background-color: #6360FF;">
-            <h4 class="text-white text-center mb-1">Novo</h4>
-        </div>
-    </div>
-    <div class="lg:col-3 xl:col-3 pr-5 pl-5">
-        <div class="card" style="background-color: #FFC960;">
-            <h4 class="text-white text-center mb-1">Aguardando</h4>
-        </div>
-    </div>
-    <div class="lg:col-3 xl:col-3 pr-5 pl-5">
-        <div class="card" style="background-color: #6360FF;">
-            <h4 class="text-white text-center mb-1">Em Andamento</h4>
-        </div>
-    </div>
-    <div class="lg:col-3 xl:col-3 pr-5 pl-5">
-        <div class="card text" style="background-color: #34C759;">
-            <h4 class="text-white text-center mb-1">Finalizado</h4>
+<div class="grid pb-0 pt-0 d-none d-sm-flex justify-content-center padding-responsivity">
+    <div class="lg:col-2 xl:col-2 pr-5 pl-5" *ngFor="let card of cards; let i = index">
+        <div 
+            class="card selectable-card" 
+            [ngStyle]="{
+                'background-color': card.color,
+                'box-shadow': selectedCard === i ? '0px 4px 8px rgba(0, 0, 0, 0.2)' : 'none',
+                'border': selectedCard === i ? '2px solid #000' : 'none'
+            }"
+            (click)="selectCard(i)">
+            <h5 class="text-white text-center mb-1 responsivity">{{ card.label }}</h5>
         </div>
     </div>
 </div>
 
-<div class="grid pb-1 pt-3 d-flex flex-wrap d-sm-none" style="justify-content: space-evenly;">
-    <div class="flex-column">
-        <div class="card" style="padding: 1.3rem !important; background-color: #6360FF;">
-            <small class="text-wrap text-white text-center"></small>
-        </div>
-    </div>
-    <div class="flex-column">
-        <div class="card" style="padding: 1.3rem !important; background-color: #FFC960;">
-            <small class="text-wrap text-white text-center"></small>
-        </div>
-    </div>
-    <div class="flex-column">
-        <div class="card" style="padding: 1.3rem !important; background-color: #6360FF;">
-            <small class="text-wrap text-white text-center"></small>
-        </div>
-    </div>
-    <div class="flex-column">
-        <div class="card" style="padding: 1.3rem !important; background-color: #34C759;">
-            <small class="text-wrap text-white text-center"></small>
+<div class="grid pb-1 pt-2 d-flex flex-wrap d-sm-none" style="justify-content: space-evenly;">
+    <div class="flex-column" *ngFor="let card of cards; let i = index">
+        <div 
+            class="card selectable-card" 
+            [ngStyle]="{
+                'background-color': card.color,
+                'box-shadow': selectedCard === i ? '0px 4px 8px rgba(0, 0, 0, 0.2)' : 'none',
+                'border': selectedCard === i ? '2px solid #000' : 'none'
+            }"
+            (click)="selectCard(i)"
+            style="padding: 1.3rem !important;">
+            <!-- <small class="text-wrap text-white text-center">{{ card.label }}</small> -->
         </div>
     </div>
 </div>

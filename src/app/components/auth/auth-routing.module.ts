@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
     imports: [RouterModule.forChild([
         { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
         { path: 'facial', loadChildren: () => import('./login-facial/login-facial.module').then(m => m.LoginFacialModule) },
+        { path: '**', redirectTo: '/404' }
     ])],
     exports: [RouterModule]
 })

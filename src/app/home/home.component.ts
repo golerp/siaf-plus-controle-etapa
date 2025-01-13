@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from '../layout/service/app.layout.service';
+import { CommunicationService } from '../service/communication.service';
 
 @Component({
     templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -23,18 +25,23 @@ export class HomeComponent implements OnInit {
 
     }
 
-    getRibbonColor(status: string): string {
-        switch (status) {
-          case 'new':
-            return '#6360FF';
-          case 'in-progress':
-            return '#FFC960';
-          case 'completed':
-            return '#34C759';
-          case 'pending':
-            return '#FF5733';
-          default:
-            return '#6360FF';
-        }
+  getRibbonColor(status: string): string {
+      switch (status) {
+        case 'new':
+          return '#6360FF';
+        case 'in-progress':
+          return '#FFC960';
+        case 'completed':
+          return '#34C759';
+        case 'pending':
+          return '#FF5733';
+        default:
+          return '#6360FF';
       }
+    }
+
+    handleCardSelected(cardLabel: string): void {
+      console.log('Card selecionado:', cardLabel);
+
+    }
 }
