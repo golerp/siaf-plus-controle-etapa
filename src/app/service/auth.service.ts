@@ -39,14 +39,12 @@ export class AuthService {
       }
 
     isAuthenticated(): boolean {
-        // Aqui você implementa a lógica para verificar se o usuário está autenticado
-        // Por exemplo, verificando se existe um token válido no localStorage ou cookie
         const token = localStorage.getItem('authToken');
-        return !!token; // Retorna true se o token existir
+        return !!token;
     }
 
     logout(): void {
-        localStorage.removeItem('authToken'); // Remove o token
-        this.router.navigate(['/auth']); // Redireciona para a página de login
+        localStorage.removeItem('authToken');
+        this.router.navigate(['/auth']);
     }
 }

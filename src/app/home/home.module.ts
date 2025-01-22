@@ -10,6 +10,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { HomeRoutingModule } from './home-routing.module';
 import { StatusComponent } from '../components/status/status.component';
+import { HomeService } from '../service/home.service';
 
 @NgModule({
     imports: [
@@ -23,6 +24,6 @@ import { StatusComponent } from '../components/status/status.component';
         ButtonModule,
         HomeRoutingModule
     ],
-    declarations: [HomeComponent, StatusComponent]
+    declarations: [HomeComponent, StatusComponent],
 })
 export class HomeModule { }
