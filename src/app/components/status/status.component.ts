@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class StatusComponent {
   selectedCard: number | null = null;
 
-  @Output() cardSelected = new EventEmitter<string>();
+  @Output() cardSelected = new EventEmitter<string | null>();
 
   cards = [
     { label: 'Novo', color: '#6360FF' },
@@ -19,7 +19,13 @@ export class StatusComponent {
 
 
   selectCard(index: number): void {
-    this.selectedCard = index;
-    this.cardSelected.emit(this.cards[index].label);
+    if (this.selectedCard === index) {
+      this.selectedCard = null;
+      this.cardSelected.emit(null);
+    } else {
+      this.selectedCard = index;
+      this.cardSelected.emit(this.cards[index].label);
+    }
   }
+  
 }

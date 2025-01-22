@@ -12,10 +12,10 @@
         </div>
 
 
-        <div class="d-flex flex-wrap col-md-3 pt-1 surface-card justify-content-center align-items-center"
+        <div class="d-flex flex-wrap col-md-4 lg:col-3 xl:col-3 pt-1 surface-card justify-content-center align-items-center"
             style="border-top-left-radius: 30px; border-top-right-radius: 30px; background-color: rgba(241, 241, 250, 1) !important;">
             
-            <div class="container py-5 px-5 justify-content-between flex flex-column pt-3">
+            <div class="container py-5 px-5 justify-content-between flex flex-column pt-3" style="z-index: 1000;">
                 <div class="input-container">
                     <i class="pi pi-envelope"></i>
                     <input id="email1" [(ngModel)]="email" type="text" placeholder="Email" pInputText
@@ -50,7 +50,7 @@
                     </p-password>
                 </div>
 
-                <button pButton pRipple label="Acessar" style="border-radius: 10px; color: var(--primary-color);"
+                <button pButton pRipple label="Acessar" style="border-radius: 10px; color: var(--primary-color); z-index: 1000;"
                     class="text-white w-full p-2 text-xl mt-2" (click)="login()"></button>
 
                 <a class="flex align-items-center justify-content-center mb-7 pt-1 font-medium no-underline ml-2 text-right cursor-pointer"

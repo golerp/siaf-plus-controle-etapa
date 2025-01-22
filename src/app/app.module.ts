@@ -8,19 +8,26 @@ import { ToastModule } from 'primeng/toast';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { MessageService } from 'primeng/api';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './guard/auth.interceptor';
+import { FormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     AppComponent,
     NotfoundComponent
   ],
   imports: [
-    CommonModule,
-    AppLayoutModule,
-    BrowserModule,
     AppRoutingModule,
-    ToastModule
+    AppLayoutModule, 
+    ToastModule, 
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    ProgressSpinnerModule
   ],
-  providers: [ { provide: LocationStrategy, useClass: PathLocationStrategy }, MessageService],
+  providers: [ { provide: LocationStrategy, useClass: PathLocationStrategy }, MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

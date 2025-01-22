@@ -1,2 +1,13 @@
+<div class="loading-overlay" *ngIf="loadingService.isLoading$ | async">
+    <div class="spinner-container">
+        <p-progressSpinner 
+            styleClass="spinner" 
+            strokeWidth="5" 
+            animationDuration=".5s" 
+            aria-label="Carregando... Aguarde!">
+        </p-progressSpinner>
+        <p class="loading-text">Carregando... Aguarde!</p>
+    </div>
+</div>
 <p-toast></p-toast>
 <router-outlet></router-outlet>

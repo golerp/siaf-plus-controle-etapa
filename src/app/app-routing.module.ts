@@ -12,10 +12,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
         pathMatch: 'full',
       },
       {
-        path: 'inicio', component: AppLayoutComponent,
-        // canActivate: [authGuard], // Protege as rotas
+        path: '', component: AppLayoutComponent,
+        canActivate: [AuthGuard], // Protege as rotas
         children: [
-            { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+          { path: 'inicio', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
         ]
       },
       { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },

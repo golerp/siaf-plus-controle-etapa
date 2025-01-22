@@ -12,6 +12,7 @@
 .card {
     padding: 1.5rem !important;
 }
+
 @media only screen and (max-width: 768px) {
     .responsivity {
         display: none !important;
@@ -19,5 +20,13 @@
     .padding-responsivity {
         padding-top: 4px !important;
         padding-bottom: 4px !important;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .lg\:col-3 {
+        flex: 0 0 auto;
+        padding: 0.5rem;
+        width: 20% !important;
     }
 }

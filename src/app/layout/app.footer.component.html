@@ -1,13 +1,14 @@
 <div class="footer d-flex w-100" style="height: 4rem;">
-    <div class="d-flex gap-8 w-100 container-fluid rounded-pill justify-content-center" style="background-color: #FCFCFF;">
-        <button class="p-link layout-topbar-button" >
-            <i class="pi pi-home" style="font-size: 1.5rem;"></i>
+    <div class="d-flex gap-8 w-100 container-fluid rounded-pill justify-content-center"
+        style="background-color: #FCFCFF;">
+        <button class="p-link layout-topbar-button" (click)="selectButton('home')">
+            <i class="pi pi-home" [ngStyle]="{'color': isSelected('home') ? '#FF8181' : ''}" style="font-size: 1.5rem;"></i>
         </button>
-        <button class="p-link layout-topbar-button" >
-            <i class="pi pi-search" style="font-size: 1.5rem;"></i>
+        <button class="p-link layout-topbar-button" (click)="selectButton('search')">
+            <i class="pi pi-search" [ngStyle]="{'color': isSelected('search') ? '#FF8181' : ''}" style="font-size: 1.5rem;"></i>
         </button>
-        <button class="p-link layout-topbar-button" >
-            <i class="pi pi-user" style="font-size: 1.5rem;"></i>
+        <button class="p-link layout-topbar-button" (click)="selectButton('user')">
+            <i class="pi pi-user" [ngStyle]="{'color': isSelected('user') ? '#FF8181' : ''}" style="font-size: 1.5rem;"></i>
         </button>
     </div>
 </div>
