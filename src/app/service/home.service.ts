@@ -12,9 +12,11 @@ export class HomeService {
 
     constructor(private router: Router, private http: HttpClient) { }
 
-    getOrdens(top: number = 10): Observable<any[]> {
-        const params = new HttpParams().set('$top', top.toString());
-
+    getOrdens(top: number, skip: number): Observable<any[]> {
+        const params = new HttpParams()
+        .set('$top', top.toString())
+        .set('$skip', skip.toString());
+        
         return this.http.get<any>(`${this.apiNodeUrl}/oficina/ordem-servico`, { params });
     }
 }

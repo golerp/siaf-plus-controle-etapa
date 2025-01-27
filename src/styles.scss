@@ -9,3 +9,30 @@
 @import "assets/style/flags/flags.css";
 @import "assets/style/badges.scss";
 @import "assets/style/code.scss";
+
+
+.custom-dialog {
+    border-radius: 15px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dialog .p-dialog-header {
+    background-color: #007bff !important;
+    color: white !important;
+    font-weight: bold;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+.custom-dialog .p-dialog-content {
+    padding: 1rem;
+}
+
+.custom-dialog .p-dialog-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+.logout-item {
+    margin-top: 10px;
+}

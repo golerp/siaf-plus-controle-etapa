@@ -5,6 +5,8 @@ import { LayoutService } from '../layout/service/app.layout.service';
 import { FooterService } from '../layout/service/app.footer.service';
 import { HomeService } from '../service/home.service';
 import { Priority } from '../base/priority.enum';
+import { DialogService } from 'primeng/dynamicdialog';
+import { FilterComponent } from '../components/filter/filter.component';
 
 @Component({
   templateUrl: './home.component.html',
@@ -19,9 +21,11 @@ export class HomeComponent implements OnInit {
   ordensServico: any[] = [];
   isLoading: boolean = false;
   hoveredCardIndex: number | null = null;
+  skip = 0;
 
   constructor(public layoutService: LayoutService,
     private homeService: HomeService,
+    private dialogService: DialogService,
     private footerService: FooterService) {
       this.windowWidth = window.innerWidth;
       this.windowHeight = window.innerHeight;
@@ -33,7 +37,10 @@ export class HomeComponent implements OnInit {
 
     this.footerService.selectedButton$.subscribe((button) => {
       this.selectedButton = button;
-      console.log('Selected button:', button);
+
+      if (button === 'search') {
+        this.openFilterModal();
+      }
     });
   }
 
@@ -95,9 +102,10 @@ export class HomeComponent implements OnInit {
 
   loadMoreCards(): void {
     this.isLoading = true;
-    this.homeService.getOrdens().subscribe({
+    this.homeService.getOrdens(10, this.skip).subscribe({
       next: (newOrdens: any) => {
         this.ordensServico = [...this.ordensServico, ...newOrdens.items];
+        this.skip += newOrdens.items.length 
         this.isLoading = false;
       },
       error: () => {
@@ -111,5 +119,27 @@ export class HomeComponent implements OnInit {
     let ordem =this.ordensServico[index];
 
     console.log("Ordem Selecionada:", ordem)
+  }
+
+  openFilterModal() {
+    const ref = this.dialogService.open(FilterComponent, {
+      width: '50%',
+      styleClass: 'custom-dialog',
+      closable: false,
+      style: {
+        'border-radius': '15px',
+        'overflow': 'hidden',
+      },
+      data: {
+        // Passe dados, se necessário
+      },
+    });
+
+    ref.onClose.subscribe((filters) => {
+      if (filters) {
+        console.log('Filtros aplicados:', filters);
+        // Aplique os filtros aqui
+      }
+    });
   }
 }

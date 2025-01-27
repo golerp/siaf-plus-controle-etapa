@@ -11,9 +11,10 @@ import { LoadingService } from 'src/app/service/loading.service';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
+    mostrarDropdown: boolean = false;
     valCheck: string[] = ['remember'];
-
+    empresas: any[] = [];
+    empresaSelecionada: any = null;
     senha!: string;
     email!: string;
 
@@ -42,15 +43,16 @@ export class LoginComponent {
             return;
         }
 
-        // Inicia o loading manual
-        this.loadingService.show();
-
         this.authService.login(this.email, this.senha).subscribe({
             next: (response: any) => {
-                const empresa = response[0];
-                localStorage.setItem('user_id', empresa.usuario.id);
-
-                this.handleTokenRequest(empresa);
+                if (response.length > 1) {
+                    this.empresas = response;
+                    this.mostrarDropdown = true;
+                } else {
+                    const empresa = response[0];
+                    this.salvarDadosStorageEmpresa(empresa);
+                    this.handleTokenRequest(empresa);
+                }
             },
             error: () => {
                 this.messageService.add({
@@ -58,7 +60,6 @@ export class LoginComponent {
                     summary: 'Erro',
                     detail: 'Usuário ou senha inválidos',
                 });
-                this.loadingService.hide();
             },
         });
     }
@@ -67,6 +68,8 @@ export class LoginComponent {
         this.authService.getToken(this.email, this.senha, empresa.id).subscribe({
             next: (res: any) => {
                 localStorage.setItem('authToken', res.access_token);
+                localStorage.setItem('expires', res.expires);
+
                 this.router.navigate(['/inicio']);
             },
             error: () => {
@@ -85,5 +88,18 @@ export class LoginComponent {
 
     loginFacial() {
         this.router.navigate(['auth/facial']); // Redireciona para o login facial
+    }
+
+    prosseguirComEmpresa() {
+        if (this.empresaSelecionada) {
+            this.salvarDadosStorageEmpresa(this.empresaSelecionada);
+            this.handleTokenRequest(this.empresaSelecionada);
+        }
+    }
+
+    salvarDadosStorageEmpresa(empresa: any) {
+        localStorage.setItem('usuario', JSON.stringify(empresa.usuario));
+        localStorage.setItem('filiais', JSON.stringify(this.empresas));
+        localStorage.setItem('empresa', JSON.stringify(empresa));
     }
 }

@@ -14,16 +14,23 @@
     position: absolute;
     color: inherit;
 }
+
+::ng-deep ol, ::ng-deep ul {
+    padding-left: 0rem !important;
+}
+
 </style>
 
 <div class="layout-topbar d-flex align-items-center" style="background-color: #6360FF;">
-    <button class="p-link icon-button">
+    <button class="p-link icon-button" (click)="userMenu.toggle($event)">
         <i class="pi pi-user" style="font-size: 2rem; color: #6360FF;"></i>
     </button>
     <div class="pl-5 text-white d-flex flex-column">
         <small>Bem Vindo</small>
-        <span>Paulo Salomão</span>
+        <span>{{ nome }}</span>
     </div>
+
+    <p-menu #userMenu [popup]="true" [model]="items"></p-menu>
 
     <div class="ml-auto">
         <button class="p-link pr-5">

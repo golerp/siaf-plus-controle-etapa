@@ -12,8 +12,8 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 10px !important;
-    margin-bottom: 1rem; 
-    background-color: white; 
+    margin-bottom: 1rem;
+    background-color: white;
     padding: 5px;
 }
 
@@ -79,4 +79,23 @@ body {
     height: 500px;
     top: 50px;
     left: -90px;
+}
+
+.truncate-text {
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+::ng-deep #pn_id_2 {
+    width: 100% !important;
+}
+
+p-dropdown {
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
 }

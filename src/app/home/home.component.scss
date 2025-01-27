@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -22,7 +23,7 @@ html, body {
 .cards-container {
     display: flex;
     flex-direction: column;
-    height: var(--cards-container-height, calc(100vh - 15rem)); /* Usando a variável CSS */
+    height: var(--cards-container-height, calc(100vh - 15rem));
     overflow: hidden;
     padding: 1rem;
     box-sizing: border-box;
@@ -54,21 +55,3 @@ html, body {
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;
 }
-
-// @media screen and (min-width: 769px) {
-//     .cards-container {
-//         height: calc(100vh - 17rem);
-//     }
-// }
-
-// @media screen and (max-width: 768px) {
-//     .cards-container {
-//         height: calc(100vh - 14rem);
-//     }
-// }
-
-// @media screen and (max-width: 480px) {
-//     .cards-container {
-//         height: calc(100vh - 13rem);
-//     }
-// }

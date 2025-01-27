@@ -11,6 +11,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { HomeRoutingModule } from './home-routing.module';
 import { StatusComponent } from '../components/status/status.component';
 import { HomeService } from '../service/home.service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
     imports: [
@@ -25,5 +26,6 @@ import { HomeService } from '../service/home.service';
         HomeRoutingModule
     ],
     declarations: [HomeComponent, StatusComponent],
+    providers: [DialogService]
 })
 export class HomeModule { }

@@ -16,13 +16,13 @@
             style="border-top-left-radius: 30px; border-top-right-radius: 30px; background-color: rgba(241, 241, 250, 1) !important;">
             
             <div class="container py-5 px-5 justify-content-between flex flex-column pt-3" style="z-index: 1000;">
-                <div class="input-container">
+                <div class="input-container" *ngIf="!mostrarDropdown">
                     <i class="pi pi-envelope"></i>
                     <input id="email1" [(ngModel)]="email" type="text" placeholder="Email" pInputText
                     class="w-full" style="padding:1rem; border-radius: 10px;">
                 </div>
 
-                <div class="input-container">
+                <div class="input-container" *ngIf="!mostrarDropdown">
                     <i id="passIcon" class="pi pi-lock"></i>
 
                     <p-password id="password1" 
@@ -50,8 +50,28 @@
                     </p-password>
                 </div>
 
-                <button pButton pRipple label="Acessar" style="border-radius: 10px; color: var(--primary-color); z-index: 1000;"
+                <button *ngIf="!mostrarDropdown" pButton pRipple label="Acessar" style="border-radius: 10px; color: var(--primary-color); z-index: 1000;"
                     class="text-white w-full p-2 text-xl mt-2" (click)="login()"></button>
+
+                <div *ngIf="mostrarDropdown">
+                    <div class="w-100">
+                        <p-dropdown 
+                            [options]="empresas" 
+                            [(ngModel)]="empresaSelecionada" 
+                            optionLabel="razaoSocial" 
+                            placeholder="Selecione uma empresa"
+                            class="w-100">
+                            <ng-template let-item pTemplate="item">
+                                <span class="truncate-text">{{ item.razaoSocial }}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                    
+                    
+                
+                    <button pButton pRipple label="Prosseguir" class="text-white w-full p-2 text-xl mt-2" style="border-radius: 10px; color: var(--primary-color); z-index: 1000;"
+                    (click)="prosseguirComEmpresa()"></button>
+                </div>
 
                 <a class="flex align-items-center justify-content-center mb-7 pt-1 font-medium no-underline ml-2 text-right cursor-pointer"
                     (click)="loginFacial()" style="color: var(--primary-color)">Login Facial</a>

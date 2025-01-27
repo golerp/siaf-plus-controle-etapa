@@ -38,10 +38,25 @@ export class AuthService {
         return this.http.post(`${this.apiUrl}/v1/painelcontrole/usuario/token`, body, { headers });
       }
 
-    isAuthenticated(): boolean {
-        const token = localStorage.getItem('authToken');
-        return !!token;
+      isAuthenticated(): boolean {
+        const token   = localStorage.getItem('authToken');
+        const expires = localStorage.getItem('expires');
+    
+        if (!token || !expires) {
+            return false;
+        }
+    
+        const expiresDate = new Date(expires);
+        const now = new Date();
+    
+        if (now > expiresDate) {
+            console.log('Token expirado');
+            return false;
+        }
+    
+        return true;
     }
+    
 
     logout(): void {
         localStorage.removeItem('authToken');
