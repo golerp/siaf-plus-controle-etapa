@@ -1,11 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Priority } from 'src/app/base/priority.enum'; 
 
 @Component({
   selector: 'app-listagem-ordem',
-  standalone: true,
-  imports: [FormsModule],
   templateUrl: './listagem-ordem.component.html',
   styleUrls: ['./listagem-ordem.component.scss']
 })
