@@ -1,0 +1,32 @@
+<div class="container-fluid bg d-flex align-items-center py-3 px-4">
+    <button pButton class="p-button-text text-white d-flex align-items-center" (click)="voltar()">
+        <i class="pi pi-chevron-left"></i>
+        <span class="ml-2 font-weight-bold">Ordem {{ ordemEtapa.numeroDocumento }}</span>
+    </button>
+</div>
+
+<div class="d-flex" style="background-color: var(--primary-color);">
+    <div class="container-fluid w-100 responsivity">
+        <div class="d-flex justify-content-center">
+            <!-- Container principal centralizado -->
+            <div class="w-100" style="max-width: 83.333%;">
+                <!-- Título alinhado à esquerda -->
+                <div class="d-flex justify-content-start align-items-start py-3">
+                    <span class="font-weight-bold h5">Informações da ordem de serviço</span>
+                </div>
+
+                <!-- Grid Container Reutilizável -->
+                <div class="info-grid" *ngFor="let info of informacoesOrdem">
+                    <div>
+                        <span class="font-weight-bold d-block">{{ info.campo1 }}</span>
+                        <span class="text-muted">{{ info.valor1 }}</span>
+                    </div>
+                    <div>
+                        <span class="font-weight-bold d-block">{{ info.campo2 }}</span>
+                        <span class="text-muted">{{ info.valor2 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

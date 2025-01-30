@@ -1,0 +1,21 @@
+.bg {
+    background-color: var(--primary-color);
+}
+
+.responsivity {
+    background-color: var(--bg-color);
+    overflow: hidden;
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px; 
+    margin-top: 16px;
+}

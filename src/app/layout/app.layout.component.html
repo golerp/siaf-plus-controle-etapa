@@ -21,16 +21,16 @@
         bottom: 0;
         width: 100%;
         z-index: 1;
-        background-color: #F1F1FA;
+        background-color: var(--bg-color);
     }
 </style>
 
 <div class="layout-wrapper" [ngClass]="containerClass">
     <app-topbar></app-topbar>
 
-    <div class="layout-main-container" style="background-color: #6360FF;">
+    <div class="layout-main-container" style="background-color: var(--primary-color);">
         <router-outlet></router-outlet>
-        <app-footer class="footer" style="background-color: #F1F1FA;"></app-footer>
+        <app-footer class="footer" style="background-color: var(--bg-color);"></app-footer>
     </div>
 
 

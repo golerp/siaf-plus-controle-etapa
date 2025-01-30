@@ -33,7 +33,7 @@ webcam {
 
 /* Ajustes gerais */
 .login-background {
-  background-color: #f1f1fa; /* Adicionando um fundo claro */
+  background-color: var(--bg-color); /* Adicionando um fundo claro */
 }
 
 .logo {
@@ -80,7 +80,7 @@ webcam {
 }
 
 .bg-color {
-  background-color: #6360FF !important;
+  background-color: var(--primary-color) !important;
 }
 
 .logo {

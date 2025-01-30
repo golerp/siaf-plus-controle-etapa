@@ -97,7 +97,8 @@ export class HomeComponent implements OnInit {
   }
 
   onCardSelecionado(card: any): void {
-    console.log(`Card selecionado: ${JSON.stringify(card)}`);
+    // console.log(`Card selecionado: ${JSON.stringify(card)}`);
+    this.router.navigate(['/ordem-etapa'], { state: { ordem: card } });
   }
 
   openFilterModal() {

@@ -64,6 +64,10 @@
                             <ng-template let-item pTemplate="item">
                                 <span class="truncate-text">{{ item.razaoSocial }}</span>
                             </ng-template>
+
+                            <ng-template let-value pTemplate="selectedItem">
+                                <span class="truncate-text">{{ value?.razaoSocial }}</span>
+                            </ng-template>
                         </p-dropdown>
                     </div>
                     

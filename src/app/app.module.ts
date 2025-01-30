@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { MessageService } from 'primeng/api';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './guard/auth.interceptor';
 import { FormsModule } from '@angular/forms';

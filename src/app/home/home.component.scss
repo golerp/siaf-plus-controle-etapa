@@ -10,14 +10,14 @@ body {
 }
 
 .bg {
-    background-color: #F1F1FA !important;
+    background-color: var(--bg-color) !important;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
 
 .separator {
     height: 2rem;
-    background-color: #6360FF;
+    background-color: var(--primary-color);
 }
 
 .cards-container {
