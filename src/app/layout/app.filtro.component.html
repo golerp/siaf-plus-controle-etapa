@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-container form-group mb-3 d-flex align-items-center position-relative">
+        <p-chips [(ngModel)]="numbers" separator="," [allowDuplicate]="false" placeholder="Nº da Ordem de Serviço"
+          styleClass="custom-chips w-100">
+        </p-chips>
+        <span class="search-icon position-absolute">
+          <i style="font-size: 1.3rem;" class="pi pi-search"></i>
+        </span>
+      </div>
+
+
+      <h6 class="card-title justify-content-center text-center" style="font-weight: bold;">
+        Encontre pela próxima Etapa
+      </h6>
+
+      <div class="pt-3 mt-3 d-grid gap-3 justify-content-center" style="grid-template-columns: repeat(4, 0fr);">
+        <p-button *ngFor="let stage of stages" [label]="stage"
+          [styleClass]="selectedStages.includes(stage) ? 'chip selected' : 'chip unselected'"
+          (click)="toggleStage(stage)">
+        </p-button>
+      </div>
+
+      <div class="d-flex flex-wrap gap-3 justify-content-center mt-7 pt-5">
+
+        <button type="button" class="btn btn-primary" style="border-radius: 10px; width: 120px; height: 45px;"
+          (click)="onCancel()">
+          Cancelar
+        </button>
+
+        <button type="button" class="btn btn-success" style="border-radius: 10px; width: 120px; height: 45px;"
+          (click)="onConfirm()">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

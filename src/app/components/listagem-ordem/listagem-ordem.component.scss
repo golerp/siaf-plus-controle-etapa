@@ -1,23 +1,5 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
-.container-fluid {
-    padding: 0;
-}
-
-.bg {
-    background-color: #F1F1FA !important;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-}
-
-.separator {
-    height: 2rem;
-    background-color: #6360FF;
+.card-bg {
+    background-color: var(--bg-color);
 }
 
 .cards-container {
@@ -27,6 +9,9 @@ body {
     overflow: hidden;
     padding: 1rem;
     box-sizing: border-box;
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+
 }
 
 .cards-scroll {
@@ -59,20 +44,4 @@ body {
 .card {
     margin-bottom: -1rem !important;
     padding: 1rem !important;
-}
-
-.truncate-text {
-    display: block;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.text {
-    align-items: center;
-    align-items: center;
-    text-align: center;
-    color: #000;
-    font-weight: bold;
 }

@@ -4,13 +4,12 @@ import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from '../layout/service/app.layout.service';
 import { FooterService } from '../layout/service/app.footer.service';
 import { HomeService } from '../service/home.service';
-import { Priority } from '../base/priority.enum';
 import { DialogService } from 'primeng/dynamicdialog';
-import { FilterComponent } from '../components/filter/filter.component';
-
+import { AppFilterComponent } from '../layout/app.filtro.component';
+import { Router } from '@angular/router';
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   public windowWidth: number;
@@ -18,13 +17,15 @@ export class HomeComponent implements OnInit {
   
   selectedCardIndex: number | null = null;
   selectedButton: string | null = null;
+  hoveredCardIndex: number | null = null;
+
   ordensServico: any[] = [];
   isLoading: boolean = false;
-  hoveredCardIndex: number | null = null;
   skip = 0;
 
   constructor(public layoutService: LayoutService,
     private homeService: HomeService,
+    private router: Router,
     private dialogService: DialogService,
     private footerService: FooterService) {
       this.windowWidth = window.innerWidth;
@@ -37,10 +38,10 @@ export class HomeComponent implements OnInit {
 
     this.footerService.selectedButton$.subscribe((button) => {
       this.selectedButton = button;
+      const isLargeScreen = this.windowWidth > 480;
 
-      if (button === 'search') {
-        this.openFilterModal();
-      }
+      button === 'search' && (isLargeScreen ? this.openFilterModal() : this.router.navigate(['/filtro']));
+      
     });
   }
 
@@ -63,27 +64,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getRibbonColor(status: string): string {
-    switch (status) {
-      case 'new':
-        return '#6360FF';
-      case 'in-progress':
-        return '#FFC960';
-      case 'completed':
-        return '#34C759';
-      case 'pending':
-        return '#FF5733';
-      default:
-        return '#6360FF';
-    }
-  }
-
   handleCardSelected(cardLabel: string | null): void {
     console.log('Filtro selecionado:', cardLabel);
 
   }
 
-  onScroll(event: Event): void {
+  handleScroll(event: Event): void {
     const target = event.target as HTMLElement;
     const scrollTop = target.scrollTop;
     const scrollHeight = target.scrollHeight;
@@ -94,10 +80,6 @@ export class HomeComponent implements OnInit {
     if (scrollTop + clientHeight >= scrollHeight - tolerance) {
       this.loadMoreCards();
     }
-  }
-
-  getPriorityLabel(priority: number): string {
-    return Priority[priority];
   }
 
   loadMoreCards(): void {
@@ -114,16 +96,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  selectCard(index: number): void {
-    this.selectedCardIndex = index;
-    let ordem =this.ordensServico[index];
-
-    console.log("Ordem Selecionada:", ordem)
+  onCardSelecionado(card: any): void {
+    console.log(`Card selecionado: ${JSON.stringify(card)}`);
   }
 
   openFilterModal() {
-    const ref = this.dialogService.open(FilterComponent, {
-      width: '50%',
+    const ref = this.dialogService.open(AppFilterComponent, {
+      width: '60%',
       styleClass: 'custom-dialog',
       closable: false,
       style: {

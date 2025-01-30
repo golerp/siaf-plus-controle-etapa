@@ -19,6 +19,11 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { HomeModule } from '../home/home.module';
 import { MenuModule } from 'primeng/menu';
+import { AppFilterComponent } from './app.filtro.component';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
     declarations: [
@@ -28,8 +33,13 @@ import { MenuModule } from 'primeng/menu';
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        AppFilterComponent
     ],
     imports: [
+        CommonModule,
+        ChipsModule,
+        TableModule,
+        ButtonModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,

@@ -12,12 +12,14 @@ import { NotfoundComponent } from './notfound/notfound.component';
         pathMatch: 'full',
       },
       {
+        //utiliza componentes global como header e foter
         path: '', component: AppLayoutComponent,
         canActivate: [AuthGuard], // Protege as rotas
         children: [
           { path: 'inicio', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
         ]
       },
+      { path: 'filtro', canActivate: [AuthGuard], loadChildren: () => import('./components/filtro/filtro.module').then(m => m.FiltroModule) },
       { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
       { path: '404', component: NotfoundComponent },
       { path: '**', redirectTo: '/404' },

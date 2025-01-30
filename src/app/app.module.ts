@@ -25,7 +25,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     BrowserModule,
     CommonModule,
     FormsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
   ],
   providers: [ { provide: LocationStrategy, useClass: PathLocationStrategy }, MessageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

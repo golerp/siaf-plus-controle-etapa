@@ -26,6 +26,7 @@
 
 .custom-dialog .p-dialog-content {
     padding: 1rem;
+    background-color: var(--bg-color);
 }
 
 .custom-dialog .p-dialog-footer {
@@ -36,3 +37,43 @@
 .logout-item {
     margin-top: 10px;
 }
+
+
+.d-grid {
+    display: grid;
+}
+
+.chip {
+    background-color: #007bff;
+    color: white;
+    border-radius: 30px !important;
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    text-align: center;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.chip:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.chip.selected {
+    background-color: #28a745;
+    color: white;
+}
+
+.chip.unselected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .chip.unselected:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    cursor: pointer;
+  }

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/service/loading.service';
+import { FullscreenService } from 'src/app/service/fullscreen.service';
 
 @Component({
     selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent {
     constructor(public layoutService: LayoutService,
         private authService: AuthService,
         private router: Router,
+        private fullscreenService: FullscreenService,
         private loadingService: LoadingService,
         private messageService: MessageService) { }
 
@@ -70,6 +72,7 @@ export class LoginComponent {
                 localStorage.setItem('authToken', res.access_token);
                 localStorage.setItem('expires', res.expires);
 
+                this.fullscreenService.enableFullscreen();
                 this.router.navigate(['/inicio']);
             },
             error: () => {

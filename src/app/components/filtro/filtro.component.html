@@ -1,0 +1,11 @@
+<div class="pb-6 container-fluid bg">
+    teste
+
+</div>
+<div style="background-color: var(--primary-color);">
+    <app-listagem-ordem
+        [ordensServico]="ordensServico" 
+        (scrollEvent)="handleScroll($event)"
+        (cardSelecionado)="onCardSelecionado($event)">
+    </app-listagem-ordem>
+</div>
