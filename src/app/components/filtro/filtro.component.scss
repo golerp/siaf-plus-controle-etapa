@@ -1,3 +1,9 @@
 .bg {
     background-color: var(--primary-color);
 }
+.p-reset {
+    all: unset;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

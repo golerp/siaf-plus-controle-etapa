@@ -3,6 +3,8 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { HomeService } from 'src/app/service/home.service'; 
 import { Priority } from 'src/app/base/priority.enum'; 
 import { DialogService } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-filtro',
@@ -29,6 +31,8 @@ export class FiltroComponent implements OnInit {
 
   constructor(public layoutService: LayoutService,
     private homeService: HomeService,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
     private dialogService: DialogService) {
       this.windowWidth = window.innerWidth;
       this.windowHeight = window.innerHeight;
@@ -84,4 +88,9 @@ export class FiltroComponent implements OnInit {
   onCardSelecionado(card: any): void {
     console.log(`Card selecionado: ${JSON.stringify(card)}`);
   }
+
+  voltar() {
+    window.location.href = '/inicio';
+  }
+  
 }

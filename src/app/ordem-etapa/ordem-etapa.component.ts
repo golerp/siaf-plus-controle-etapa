@@ -33,7 +33,7 @@ export class OrdemEtapaComponent {
       { campo1: 'Status',       valor1: Status[ordem.status], campo2: 'Prioridade',     valor2: Priority[ordem.prioridade] },
       { campo1: 'Etapa atual',  valor1: 'ordem.etapaAtual',   campo2: 'Próxima etapa',  valor2: 'ordem.proximaEtapa' },
 
-      { campo1: 'Posto de atendimento', valor1: 'ordem.postoAtendimento',            campo2: 'Responsável',      valor2: 'ordem.responsavel' },
+      { campo1: 'Posto de atendim.', valor1: 'ordem.postoAtendim.',            campo2: 'Responsável',      valor2: 'ordem.responsavel' },
       { campo1: 'Data de abertura',     valor1: this.formatData(ordem.dataAbertura), campo2: 'Data de previsão', valor2: this.formatData(ordem.dataPrevisao) },
     ];
   }
