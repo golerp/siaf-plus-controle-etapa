@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Priority } from 'src/app/base/priority.enum'; 
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Priority } from 'src/app/base/priority.enum';
 
 @Component({
   selector: 'app-listagem-ordem',
@@ -11,7 +11,33 @@ export class ListagemOrdemComponent {
   @Output() scrollEvent = new EventEmitter<Event>();
   @Output() cardSelecionado = new EventEmitter<any>();
 
+  public windowWidth: number;
+  public windowHeight: number;
   hoveredCardIndex: number | null = null;
+
+  constructor() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.windowWidth = event.target.innerWidth;
+    this.windowHeight = event.target.innerHeight;
+    this.updateCardContainerHeight();
+  }
+
+  updateCardContainerHeight(): void {
+    if (this.windowWidth >= 769 && this.windowWidth <= 1024) {
+      document.documentElement.style.setProperty('--cards-container-height', `calc(100vh - 17rem)`);
+    } else if (this.windowWidth >= 481 && this.windowWidth <= 768) {
+      document.documentElement.style.setProperty('--cards-container-height', `calc(100vh - 14rem)`);
+    } else if (this.windowWidth <= 480) {
+      document.documentElement.style.setProperty('--cards-container-height', `calc(100vh - 13rem)`);
+    } else {
+      document.documentElement.style.setProperty('--cards-container-height', `calc(100vh - 15rem)`);
+    }
+  }
 
   selectCard(index: number): void {
     const selectedCard = this.ordensServico[index];

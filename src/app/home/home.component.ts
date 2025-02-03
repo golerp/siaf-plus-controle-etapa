@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.footerService.setSelectedButton('home');
     this.updateCardContainerHeight();
     this.loadMoreCards();
 
@@ -97,7 +98,6 @@ export class HomeComponent implements OnInit {
   }
 
   onCardSelecionado(card: any): void {
-    // console.log(`Card selecionado: ${JSON.stringify(card)}`);
     this.router.navigate(['/ordem-etapa'], { state: { ordem: card } });
   }
 
@@ -116,6 +116,8 @@ export class HomeComponent implements OnInit {
     });
 
     ref.onClose.subscribe((filters) => {
+      this.footerService.setSelectedButton('home');
+
       if (filters) {
         console.log('Filtros aplicados:', filters);
         // Aplique os filtros aqui

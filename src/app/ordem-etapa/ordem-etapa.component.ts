@@ -41,4 +41,8 @@ export class OrdemEtapaComponent {
   formatData(valor: Date | undefined) {
     return this.datePipe.transform(valor, 'dd/MM/yyyy')
   }
+
+  iniciarOrdem() {
+    // Implementar
+  }
 }
