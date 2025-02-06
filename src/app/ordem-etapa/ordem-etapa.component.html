@@ -9,7 +9,7 @@
     <div class="container-fluid w-100 responsivity">
         <div class="d-flex justify-content-center">
 
-            <div class="content">
+            <div *ngIf="!tabTree" class="content">
                 <div class="d-flex justify-content-center align-items-center py-3">
                     <div class="col-6 d-flex justify-content-center">
                         <span class="font-weight-bold h5 text-center">Informações da ordem de serviço</span>
@@ -45,6 +45,10 @@
                     </div>
                 </div>
                 
+            </div>
+
+            <div *ngIf="tabTree" class="content">
+                <app-tab-tree></app-tab-tree>
             </div>
         </div>
     </div>

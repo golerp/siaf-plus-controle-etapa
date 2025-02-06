@@ -3,6 +3,7 @@ import { Subject, Observable } from 'rxjs';
 import { BiometriaService } from '../../../service/biometria.service';
 import * as faceapi from '@vladmandic/face-api';
 import { MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-facial',
@@ -13,12 +14,14 @@ export class LoginFacialComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
   private isProcessing = false;
   public isRegisterMode = false;
+  userId: any;
 
   // Referência ao componente webcam
   @ViewChild('webcam') webcam: any;
 
   constructor(private biometriaService: BiometriaService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {}
 
   public get triggerObservable(): Observable<void> {
@@ -27,24 +30,32 @@ export class LoginFacialComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadModels();
+
+    this.userId = this.route.snapshot.paramMap.get('id');
+    
+    // console.log(this.userId)
+    // debugger
+    if (this.userId != null)
+      this.isRegisterMode = true;
+
     this.startFacialRecognition();
   }
 
   // Carrega os modelos necessários do face-api.js
-  private async loadModels(): Promise<void> {
-    const modelPath = '/assets/models'; // Caminho para os modelos
+  async loadModels(): Promise<void> {
+    const modelPath = '/assets/models';
     await faceapi.loadTinyFaceDetectorModel(modelPath);
     await faceapi.loadFaceLandmarkModel(modelPath);
     console.log('Modelos carregados com sucesso!');
   }
 
   // Inicia o reconhecimento facial
-  private startFacialRecognition(): void {
+  startFacialRecognition(): void {
     this.startVideoFeed();
   }
 
   // Inicia o feed de vídeo da webcam
-  private startVideoFeed(): void {
+  startVideoFeed(): void {
     const videoElement = document.createElement('video');
     videoElement.width = 640;
     videoElement.height = 480;
@@ -55,7 +66,7 @@ export class LoginFacialComponent implements OnInit {
       .then((stream) => {
         videoElement.srcObject = stream;
         videoElement.play();
-        this.detectFacesContinuously(videoElement); // Inicia a detecção de rostos
+        this.detectFacesContinuously(videoElement);
       })
       .catch((err) => {
         console.error('Erro ao acessar a câmera:', err);
@@ -63,7 +74,7 @@ export class LoginFacialComponent implements OnInit {
   }
 
   // Realiza a detecção contínua de rostos
-  private detectFacesContinuously(videoElement: HTMLVideoElement): void {
+  detectFacesContinuously(videoElement: HTMLVideoElement): void {
     setInterval(async () => {
       if (!this.isProcessing) {
         this.isProcessing = true;
@@ -75,7 +86,7 @@ export class LoginFacialComponent implements OnInit {
 
         if (detections.length > 0) {
           this.messageService.add({ severity: 'info', summary: 'Informação', detail: 'Rosto detectado!' })
-          // Se houver um rosto, você pode proceder com o login ou cadastro
+
           const base64Image = this.captureImage(videoElement);
           const file = this.base64ToFile(base64Image, 'facial_image.jpg');
           
@@ -94,7 +105,7 @@ export class LoginFacialComponent implements OnInit {
   }
 
   // Converte base64 para File
-  private base64ToFile(base64Image: string, filename: string): File {
+  base64ToFile(base64Image: string, filename: string): File {
     const arr = base64Image.split(',');
     const match = arr[0].match(/:(.*?);/);
     const mime = match ? match[1] : '';
@@ -108,21 +119,30 @@ export class LoginFacialComponent implements OnInit {
   }
 
   // Registra a biometria facial
-  private async registerFacial(file: File): Promise<void> {
+  async registerFacial(file: File): Promise<void> {
     const formData = new FormData();
     formData.append('image', file);
-    formData.append('user_id', '1');
+    formData.append('user_id', this.userId);
   
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
     try {
       const response = await this.biometriaService.cadastroFacial(formData);
-      console.log('Cadastro realizado com sucesso:', response);
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Facial Cadastrada!' });
+
+      setTimeout(() => {
+        window.close();
+      }, 5000);
+
     } catch (error) {
-      console.error('Erro ao cadastrar facial:', error);
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível realizar o cadastro. Tente novamente!' });
     }
   }
   
   // Realiza o login com biometria facial
-  private async loginFacial(file: File): Promise<void> {
+  async loginFacial(file: File): Promise<void> {
     const formData = new FormData();
     formData.append('image', file);
   
@@ -137,8 +157,9 @@ export class LoginFacialComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.message });
     }
   }
+
   // Captura a imagem base64 do vídeo
-  private captureImage(videoElement: HTMLVideoElement): string {
+  captureImage(videoElement: HTMLVideoElement): string {
     const canvas = document.createElement('canvas');
     canvas.width = videoElement.width;
     canvas.height = videoElement.height;

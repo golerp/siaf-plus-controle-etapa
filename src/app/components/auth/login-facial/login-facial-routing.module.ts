@@ -4,7 +4,8 @@ import { LoginFacialComponent } from './login-facial.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: LoginFacialComponent }
+        { path: '', component: LoginFacialComponent },
+        { path: 'cadastrar/:id', component: LoginFacialComponent }
     ])],
     exports: [RouterModule]
 })

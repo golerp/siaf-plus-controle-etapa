@@ -1,0 +1,11 @@
+<div class="container mt-4">
+    <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabPanel *ngFor="let tab of tabs; let i = index" [header]="tab.title" [selected]="i === activeIndex">
+        <p-tree [value]="tab.treeData" selectionMode="checkbox">
+          <ng-template let-node pTemplate="default">
+            <span>{{ node.label }}</span>
+          </ng-template>
+        </p-tree>
+      </p-tabPanel>
+    </p-tabView>
+  </div>

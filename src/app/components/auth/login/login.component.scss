@@ -91,7 +91,7 @@ body {
 }
 
 ::ng-deep {
-    @for $i from 0 to 20 {
+    @for $i from 0 to 50 {
       #pn_id_#{$i} {
         width: 100% !important;
       }

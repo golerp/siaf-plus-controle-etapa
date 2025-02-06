@@ -45,6 +45,8 @@ export class LoginComponent {
             return;
         }
 
+        document.addEventListener('click', this.enterFullscreenOnce);
+
         this.authService.login(this.email, this.senha).subscribe({
             next: (response: any) => {
                 if (response.length > 1) {
@@ -72,7 +74,8 @@ export class LoginComponent {
                 localStorage.setItem('authToken', res.access_token);
                 localStorage.setItem('expires', res.expires);
 
-                this.fullscreenService.enableFullscreen();
+                // this.fullscreenService.enableFullscreen();
+
                 this.router.navigate(['/inicio']);
             },
             error: () => {
@@ -105,4 +108,9 @@ export class LoginComponent {
         localStorage.setItem('filiais', JSON.stringify(this.empresas));
         localStorage.setItem('empresa', JSON.stringify(empresa));
     }
+
+    private enterFullscreenOnce = () => {
+        this.fullscreenService.enableFullscreen();
+        document.removeEventListener('click', this.enterFullscreenOnce);
+    };
 }

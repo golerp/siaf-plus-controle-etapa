@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 })
 export class OrdemEtapaComponent {
   ordemEtapa: Ordem;
+  tabTree: boolean = false;
   informacoesOrdem: { campo1: any, valor1: any, campo2: any, valor2: any }[] = [];
 
   constructor(private router: Router, private datePipe: DatePipe) {
@@ -44,5 +45,7 @@ export class OrdemEtapaComponent {
 
   iniciarOrdem() {
     // Implementar
+
+    this.tabTree = !this.tabTree;
   }
 }

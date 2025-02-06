@@ -12,15 +12,33 @@ export class AuthInterceptor implements HttpInterceptor {
 
         this.loadingService.show();
 
-        const cloned = req.clone({
-            setHeaders: {
-                Authorization: token ? `Bearer ${token}` : '',
-                ...(!req.headers.has('Content-Type') && { 'Content-Type': 'application/json' }),
-            },
-        });
+        const clonedReq = this.cloneRequestWithHeaders(req, token);
 
-        return next.handle(cloned).pipe(
+        return next.handle(clonedReq).pipe(
             finalize(() => this.loadingService.hide())
         );
+    }
+
+    private cloneRequestWithHeaders(req: HttpRequest<any>, token: string | null): HttpRequest<any> {
+        const headers = this.getHeaders(req, token);
+        return req.clone({ setHeaders: headers });
+    }
+
+    private getHeaders(req: HttpRequest<any>, token: string | null): { [header: string]: string } {
+        const headers: { [header: string]: string } = {
+            Authorization: token ? `Bearer ${token}` : '',
+        };
+
+        // Não sobrescrever Content-Type se a requisição for multipart/form-data ou já tiver Content-Type
+        if (!req.headers.has('Content-Type')) {
+            if (req.body instanceof FormData) {
+                // Não definimos Content-Type explicitamente para FormData
+                return headers;
+            }
+
+            headers['Content-Type'] = 'application/json';
+        }
+
+        return headers;
     }
 }
