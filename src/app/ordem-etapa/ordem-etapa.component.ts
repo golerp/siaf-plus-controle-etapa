@@ -26,7 +26,7 @@ export class OrdemEtapaComponent {
   }
 
   voltar() {
-    this.router.navigate(['/inicio']);
+    window.location.href = '/inicio';
   }
 
   private mapearInformacoesOrdem(ordem: Ordem) {

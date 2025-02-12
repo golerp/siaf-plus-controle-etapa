@@ -16,23 +16,24 @@
       </h6>
 
       <div class="pt-3 mt-3 d-grid gap-3 justify-content-center" style="grid-template-columns: repeat(4, 0fr);">
-        <p-button *ngFor="let stage of stages" [label]="stage"
-          [styleClass]="selectedStages.includes(stage) ? 'chip selected' : 'chip unselected'"
-          (click)="toggleStage(stage)">
+        <p-button *ngFor="let stage of stages; let i = index" [label]="stage.descricao"
+        [styleClass]="selectedStages[stage.id] ? 'chip selected' : 'chip unselected'"
+        (click)="toggleStage(stage)">
         </p-button>
       </div>
 
       <div class="d-flex flex-wrap gap-3 justify-content-center mt-7 pt-5">
+
+        <button type="button" class="btn btn-success" style="border-radius: 10px; width: 120px; height: 45px;"
+          (click)="onConfirm()">
+          Confirmar
+        </button>
 
         <button type="button" class="btn btn-primary" style="border-radius: 10px; width: 120px; height: 45px;"
           (click)="onCancel()">
           Cancelar
         </button>
 
-        <button type="button" class="btn btn-success" style="border-radius: 10px; width: 120px; height: 45px;"
-          (click)="onConfirm()">
-          Confirmar
-        </button>
       </div>
     </div>
   </div>

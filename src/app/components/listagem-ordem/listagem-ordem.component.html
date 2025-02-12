@@ -3,7 +3,7 @@
       Ordem de Serviços
     </strong>
     <div class="cards-scroll justify-content-center mb-4" (scroll)="onScroll($event)">
-      <div *ngFor="let card of ordensServico; let i = index" class="col-11 col-lg-6 col-xl-4"
+      <div *ngFor="let card of ordensServico | async; let i = index" class="col-11 col-lg-6 col-xl-4"
           (mouseenter)="hoveredCardIndex = i" (mouseleave)="hoveredCardIndex = null">
         
         <div class="card position-relative" [ngClass]="{'selected-card': hoveredCardIndex === i}"

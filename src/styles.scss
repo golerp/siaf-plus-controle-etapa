@@ -22,6 +22,17 @@
     font-weight: bold;
     border-top-left-radius: 15px !important;
     border-top-right-radius: 15px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.custom-dialog .p-dialog-header-icon {
+    color: white !important;
+}
+
+.custom-dialog .p-dialog-header-icon:hover {
+    background: transparent !important;
+    color: white !important;
 }
 
 .custom-dialog .p-dialog-content {

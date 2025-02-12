@@ -5,6 +5,7 @@ import { Priority } from 'src/app/base/priority.enum';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-filtro',
@@ -24,7 +25,7 @@ export class FiltroComponent implements OnInit {
   selectedButton: string | null = null;
   hoveredCardIndex: number | null = null;
 
-  ordensServico: any[] = [];
+  ordensServico = new BehaviorSubject<any[]>([]);
   isLoading: boolean = false;
   skip = 0;
   isMobile: boolean = false;
@@ -75,7 +76,8 @@ export class FiltroComponent implements OnInit {
     this.isLoading = true;
     this.homeService.getOrdens(10, this.skip).subscribe({
       next: (newOrdens: any) => {
-        this.ordensServico = [...this.ordensServico, ...newOrdens.items];
+        const currentOrdens = this.ordensServico.getValue();
+        this.ordensServico.next([...currentOrdens, ...newOrdens.items]);        
         this.skip += newOrdens.items.length 
         this.isLoading = false;
       },

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Subscription, debounceTime } from 'rxjs';
+import { BehaviorSubject, Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from '../layout/service/app.layout.service';
 import { FooterService } from '../layout/service/app.footer.service';
 import { HomeService } from '../service/home.service';
@@ -19,9 +19,10 @@ export class HomeComponent implements OnInit {
   selectedButton: string | null = null;
   hoveredCardIndex: number | null = null;
 
-  ordensServico: any[] = [];
+  ordensServico = new BehaviorSubject<any[]>([]);
   isLoading: boolean = false;
   skip = 0;
+  filtros: any;
 
   constructor(public layoutService: LayoutService,
     private homeService: HomeService,
@@ -32,19 +33,34 @@ export class HomeComponent implements OnInit {
       this.windowHeight = window.innerHeight;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.filtros = this.getStoredFilters();
+  
     this.footerService.setSelectedButton('home');
     this.updateCardContainerHeight();
-    this.loadMoreCards();
-
+  
+    if (!this.filtros) {
+      this.loadMoreCards();
+    } else {
+      this.loadCardFilter(this.filtros);
+    }
+  
     this.footerService.selectedButton$.subscribe((button) => {
       this.selectedButton = button;
       const isLargeScreen = this.windowWidth > 480;
-
-      button === 'search' && (isLargeScreen ? this.openFilterModal() : this.router.navigate(['/filtro']));
-      
+  
+      if (button === 'search') {
+        isLargeScreen ? this.openFilterModal() : this.router.navigate(['/filtro']);
+      }
     });
   }
+  
+
+  private getStoredFilters(): any | null {
+    const filtrosSalvos = localStorage.getItem('filtros');
+    return filtrosSalvos ? JSON.parse(filtrosSalvos) : null;
+  }
+  
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
@@ -78,7 +94,7 @@ export class HomeComponent implements OnInit {
   
     const tolerance = 5;
 
-    if (scrollTop + clientHeight >= scrollHeight - tolerance) {
+    if (scrollTop + clientHeight >= scrollHeight - tolerance && !this.filtros) {
       this.loadMoreCards();
     }
   }
@@ -87,7 +103,8 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.homeService.getOrdens(10, this.skip).subscribe({
       next: (newOrdens: any) => {
-        this.ordensServico = [...this.ordensServico, ...newOrdens.items];
+        const currentOrdens = this.ordensServico.getValue();
+        this.ordensServico.next([...currentOrdens, ...newOrdens.items]);        
         this.skip += newOrdens.items.length 
         this.isLoading = false;
       },
@@ -105,23 +122,45 @@ export class HomeComponent implements OnInit {
     const ref = this.dialogService.open(AppFilterComponent, {
       width: '60%',
       styleClass: 'custom-dialog',
-      closable: false,
+      closable: true,
       style: {
         'border-radius': '15px',
         'overflow': 'hidden',
       },
       data: {
-        // Passe dados, se necessário
+        ...this.filtros
       },
     });
 
     ref.onClose.subscribe((filters) => {
       this.footerService.setSelectedButton('home');
-
-      if (filters) {
-        console.log('Filtros aplicados:', filters);
-        // Aplique os filtros aqui
+    
+      const hasValidFilters = filters && !Object.values(filters).every(value => Array.isArray(value) && value.length === 0);
+    
+      if (hasValidFilters) {
+        this.filtros = filters;
+        localStorage.setItem('filtros', JSON.stringify(filters));
+        this.loadCardFilter(filters);
+      } else if (hasValidFilters === false) {
+        localStorage.removeItem('filtros');
+        this.filtros = null;
+        this.loadMoreCards();
       }
+    });
+  }
+
+  loadCardFilter(filters: any): void {
+    this.isLoading = true;
+    const savedFilters = filters || JSON.parse(localStorage.getItem('filtros') || '{}');
+
+    this.homeService.getOrdens(10, 0, savedFilters).subscribe({
+      next: (ordens: any) => {
+        this.ordensServico.next([...ordens.items]);
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

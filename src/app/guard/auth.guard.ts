@@ -1,6 +1,6 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { AuthService } from '../service/auth.service'; // Ajuste o caminho conforme sua estrutura
+import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
 export const AuthGuard: CanActivateFn = (route, state) => {
@@ -10,7 +10,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
   if (authService.isAuthenticated()) {
     return true;
   } else {
-    router.navigate(['/auth/login']); // Redireciona para a página de login
+    router.navigate(['/auth/login']);
     return false;
   }
 };

@@ -50,16 +50,14 @@ export class AuthService {
         const now = new Date();
     
         if (now > expiresDate) {
-            console.log('Token expirado');
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('expires');
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('filiais');
+            
             return false;
         }
     
         return true;
-    }
-    
-
-    logout(): void {
-        localStorage.removeItem('authToken');
-        this.router.navigate(['/auth']);
     }
 }

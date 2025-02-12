@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Priority } from 'src/app/base/priority.enum';
 
 @Component({
@@ -7,7 +8,7 @@ import { Priority } from 'src/app/base/priority.enum';
   styleUrls: ['./listagem-ordem.component.scss']
 })
 export class ListagemOrdemComponent {
-  @Input() ordensServico: any[] = [];
+  @Input() ordensServico!: Observable<any>
   @Output() scrollEvent = new EventEmitter<Event>();
   @Output() cardSelecionado = new EventEmitter<any>();
 
@@ -40,8 +41,10 @@ export class ListagemOrdemComponent {
   }
 
   selectCard(index: number): void {
-    const selectedCard = this.ordensServico[index];
-    this.cardSelecionado.emit(selectedCard);
+    this.ordensServico.subscribe(ordens => {
+      const selectedCard = ordens[index];
+      this.cardSelecionado.emit(selectedCard);
+    });
   }
 
   getRibbonColor(status: string): string {
