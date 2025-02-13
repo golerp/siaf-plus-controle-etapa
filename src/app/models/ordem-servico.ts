@@ -4,7 +4,7 @@ import { Equipamento } from "./equipamento";
 import { Pagamento } from "./pagamento";
 import { Usuario } from "./usuario";
 
-export interface Ordem {
+export interface OrdemServico {
     cliente: Cliente;
     adiantamento?: number;
     condicoes?: Condicao;

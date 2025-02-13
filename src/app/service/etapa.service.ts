@@ -17,4 +17,8 @@ export class EtapaService {
     getAll(): Observable<any[]> {        
         return this.http.get<any>(`${this.apiNodeUrl}/oficina/etapa`);
     }
+
+    iniciarEtapa(payload: any): Observable<any> {
+        return this.http.post<any>(`${this.apiNodeUrl}/oficina/ordem-servico/etapa`, payload)
+    }
 }

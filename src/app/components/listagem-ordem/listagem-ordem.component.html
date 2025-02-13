@@ -9,15 +9,25 @@
         <div class="card position-relative" [ngClass]="{'selected-card': hoveredCardIndex === i}"
             (click)="selectCard(i)">
           <div class="card-ribbon" [ngStyle]="{'background-color': getRibbonColor(card.status)}"></div>
-          <div class="d-flex justify-content-between">
-            <span class="truncate-text text-900 font-medium">
+          <div class="d-flex align-items-center w-100">
+            <!-- Informações do equipamento -->
+            <span class="truncate-text text-900 font-medium d-inline-flex align-items-center">
               ID.{{ card.ofcEquipamento?.id }} - {{ card.ofcEquipamento?.modelo }} - 
               {{ card.ofcEquipamento?.serie }} {{ card.ofcEquipamento?.tag }}
+              
+              <!-- Retângulo logo ao lado do equipamento -->
+              <div *ngIf="card.ordemServicoEtapa?.length > 0" class="teste-box-container ms-5">
+                <div class="teste-box">
+                  {{ card.ordemServicoEtapa[card.ordemServicoEtapa.length - 1]?.oficinaEtapa?.descricao }}
+                </div>
+                <span 
+                  class="pill"
+                  [ngStyle]="{ 'background-color': card.ordemServicoEtapa[card.ordemServicoEtapa.length - 1]?.atual ? 'var(--primary-color)' : '#8E8E93' }">
+                  {{ card.ordemServicoEtapa[card.ordemServicoEtapa.length - 1]?.atual ? 'Iniciado' : 'Finalizado' }}
+                </span>
+              </div>                      
+              
             </span>
-            <div class="d-flex align-items-center justify-content-center {{ card.bgColor }} border-round"
-                [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-              <i class="pi {{ card.icon }} {{ card.iconColor }} text-xl"></i>
-            </div>
           </div>
           <span style="font-weight: bold !important; font-size: 14px;">O.S {{ card.numeroDocumento }}</span>
           <span>

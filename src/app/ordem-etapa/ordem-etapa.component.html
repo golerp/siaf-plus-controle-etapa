@@ -1,7 +1,7 @@
 <div class="container-fluid bg d-flex align-items-center py-4 px-4">
     <button class="p-reset text-white d-flex align-items-center" (click)="voltar()">
         <i class="pi pi-chevron-left"></i>
-        <span class="ml-2">Ordem {{ ordemEtapa.numeroDocumento }}</span>
+        <span class="ml-2">Ordem {{ ordemServico.numeroDocumento }}</span>
     </button>    
 </div>
 
@@ -39,8 +39,11 @@
 
                 <div class="d-flex flex-wrap justify-content-center mt-3">
                     <div class="col-12 md:col-6">
-                        <button style="border-radius: 5px; background-color: var(--success-color);" class="w-100 btn text-white" (click)="iniciarOrdem()">
-                            Iniciar ordem de serviço
+                        <button *ngIf="!etapaIniciada" style="border-radius: 5px; background-color: var(--success-color);" class="w-100 btn text-white" (click)="acaoEtapa('iniciar')">
+                            Iniciar Etapa
+                        </button>
+                        <button *ngIf="etapaIniciada" style="border-radius: 5px; background-color: var(--error-color);" class="w-100 btn text-white" (click)="acaoEtapa('finalizar')">
+                            Finalizar Etapa
                         </button>
                     </div>
                 </div>
