@@ -108,3 +108,21 @@ body {
         padding-left: 0rem;
     }
 }
+
+@media (min-width: 768px) {
+    .truncate-text {
+        max-width: 200px;
+    }
+}
+
+@media (min-width: 992px) {
+    .truncate-text {
+        max-width: 245px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .truncate-text {
+        max-width: 290px;
+    }
+}
