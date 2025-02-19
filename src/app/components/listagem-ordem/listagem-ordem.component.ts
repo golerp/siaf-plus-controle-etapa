@@ -49,14 +49,14 @@ export class ListagemOrdemComponent {
 
   getRibbonColor(status: string): string {
     switch (status.toString()) {
-      case '0':
-        return '#6360FF';
       case '1':
+        return '#6360FF';
+      case '0':
         return '#FFC960';
       case '2':
+        return '#6360FF';
+      case '4':
         return '#34C759';
-      case '3':
-        return '#FF5733';
       default:
         return '#6360FF';
     }

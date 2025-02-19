@@ -1,4 +1,4 @@
-export enum Status {
+export enum OrdemStatus {
     Aguardando  = 0,
     Aprovado    = 1,
     Andamento   = 2,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdemServico } from '../models/ordem-servico';
 import { Router } from '@angular/router';
 import { Priority } from 'src/app/base/priority.enum';
-import { Status } from 'src/app/base/status.enum';
+import { OrdemStatus } from 'src/app/base/ordem-status.enum';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { EtapaService } from '../service/etapa.service';
 import { MessageService } from 'primeng/api';
@@ -36,7 +36,7 @@ export class OrdemEtapaComponent {
 
   private mapearInformacoesOrdem(ordem: OrdemServico) {
     return [
-      { campo1: 'Status',       valor1: Status[ordem.status], campo2: 'Prioridade',     valor2: Priority[ordem.prioridade] },
+      { campo1: 'Status',       valor1: OrdemStatus[ordem.status], campo2: 'Prioridade',     valor2: Priority[ordem.prioridade] },
       { campo1: 'Etapa atual',  valor1: 'ordem.etapaAtual',   campo2: 'Próxima etapa',  valor2: 'ordem.proximaEtapa' },
 
       { campo1: 'Posto de atendim.', valor1: 'ordem.postoAtendim.',            campo2: 'Responsável',      valor2: 'ordem.responsavel' },

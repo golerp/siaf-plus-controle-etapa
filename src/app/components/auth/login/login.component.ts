@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
@@ -59,6 +59,9 @@ export class LoginComponent {
                 }
             },
             error: () => {
+                const token = localStorage.getItem('authToken');
+                if (token != null) localStorage.clear();
+                
                 this.messageService.add({
                     severity: 'error',
                     summary: 'Erro',
