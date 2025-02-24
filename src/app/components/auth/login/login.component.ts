@@ -11,7 +11,7 @@ import { FullscreenService } from 'src/app/service/fullscreen.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     mostrarDropdown: boolean = false;
     valCheck: string[] = ['remember'];
     empresas: any[] = [];
@@ -25,6 +25,11 @@ export class LoginComponent {
         private fullscreenService: FullscreenService,
         private loadingService: LoadingService,
         private messageService: MessageService) { }
+
+    ngOnInit(): void {
+        const token = localStorage.getItem('authToken');
+        if (token != null) localStorage.clear();
+    }
 
     login(): void {
         if (!this.email) {

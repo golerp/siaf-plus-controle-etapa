@@ -8,6 +8,7 @@ export interface OrdemServico {
     cliente: Cliente;
     adiantamento?: number;
     condicoes?: Condicao;
+    orcamento?: boolean;
     dataAbertura?: Date;
     dataEntrega?: Date;
     dataFechamento?: Date;

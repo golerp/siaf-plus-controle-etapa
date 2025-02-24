@@ -20,7 +20,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
         ]
       },
       { path: 'filtro', canActivate: [AuthGuard], loadChildren: () => import('./components/filtro/filtro.module').then(m => m.FiltroModule) },
-      { path: 'ordem-etapa', canActivate: [AuthGuard], loadChildren: () => import('./ordem-etapa/ordem-etapa.module').then(m => m.OrdemEtapaModule) },
+      { path: 'ordem-etapa', canActivate: [AuthGuard], loadChildren: () => import('./controle-etapa/controle-etapa.module').then(m => m.ControleEtapaModule) },
       { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
       { path: '404', component: NotfoundComponent },
       { path: '**', redirectTo: '/404' },

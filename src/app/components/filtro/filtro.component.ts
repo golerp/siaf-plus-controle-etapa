@@ -94,5 +94,12 @@ export class FiltroComponent implements OnInit {
   voltar() {
     window.location.href = '/inicio';
   }
+
+  onConfirm(): void {3
+
+  }
+
+  onCancel(): void {
+  }
   
 }
