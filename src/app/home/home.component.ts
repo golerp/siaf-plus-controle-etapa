@@ -196,13 +196,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // loadCardFilter(filters: any): void {
+  //   this.isLoading = true;
+  //   const savedFilters = filters || JSON.parse(localStorage.getItem('filtros') || '{}');
+
+  //   this.homeService.getOrdens(10, 0, savedFilters).subscribe({
+  //     next: (ordens: any) => {
+  //       this.ordensServico.next([...ordens.items]);
+  //       this.isLoading = false;
+  //     },
+  //     error: () => {
+  //       this.isLoading = false;
+  //     },
+  //   });
+  // }
+
   loadCardFilter(filters: any): void {
     this.isLoading = true;
     const savedFilters = filters || JSON.parse(localStorage.getItem('filtros') || '{}');
-
-    this.homeService.getOrdens(10, 0, savedFilters).subscribe({
-      next: (ordens: any) => {
-        this.ordensServico.next([...ordens.items]);
+  
+    this.homeService.getOrdensEOrcamentosCombinados(10, 0, savedFilters).subscribe({
+      next: (resultado: {items: any[]}) => {
+        this.ordensServico.next([...resultado.items]);
         this.isLoading = false;
       },
       error: () => {

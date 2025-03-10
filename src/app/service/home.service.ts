@@ -5,6 +5,12 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OrdemStatus } from '../base/ordem-status.enum';
 import { OrcamentoStatus } from '../base/orcamento-status.enum';
+import { forkJoin, map } from 'rxjs';
+
+interface ResultadoPaginado {
+    items: any[];
+    total: number;
+}
 
 @Injectable({
     providedIn: 'root',
@@ -13,6 +19,25 @@ export class HomeService {
     private apiNodeUrl = environment.apiNodeUrl
 
     constructor(private router: Router, private http: HttpClient) { }
+
+    getOrdensEOrcamentos(top: number, skip: number, filter?: any): Observable<{ordens: any[], orcamentos: any[]}> {
+        return forkJoin({
+            ordens: this.getOrdens(top, skip, filter),
+            orcamentos: this.getOrcamentos(top, skip, filter)
+        });
+    }
+
+    getOrdensEOrcamentosCombinados(top: number, skip: number, filter?: any): Observable<{items: any[]}> {
+        return this.getOrdensEOrcamentos(top, skip, filter).pipe(
+          map((resultado: any) => {
+            const { ordens, orcamentos } = resultado;
+            const ordensComTipo = ordens.items.map((item: any) => ({ ...item, tipo: 'ordem' }));
+            const orcamentosComTipo = orcamentos.items.map((item: any) => ({ ...item, tipo: 'orcamento' }));
+            if (orcamentosComTipo && orcamentosComTipo.length) orcamentosComTipo.map((x: any) => { x.orcamento = true})
+            return { items: [...ordensComTipo, ...orcamentosComTipo] };
+          })
+        );
+    }
 
     getOrdens(top: number, skip: number, filter?: any): Observable<any[]> {
         let params = new HttpParams()
