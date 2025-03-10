@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit {
   }
   
   onCardSelecionado(card: any): void {
-    this.router.navigate(['/ordem-etapa'], { state: { ordem: card } });
+    this.router.navigate(['/controle-etapa'], { state: { documento: card } });
   }
 
   openFilterModal() {
