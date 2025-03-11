@@ -89,4 +89,5 @@ export interface OrcamentoServico {
     total: number;
     usuario?: Usuario;
     valorBruto: number;
+    ofcControleEtapa?: any;
 }

@@ -90,4 +90,5 @@ export interface OrdemServico {
     total: number;
     usuario?: Usuario;
     valorBruto: number;
+    ofcControleEtapa?: any;
 }

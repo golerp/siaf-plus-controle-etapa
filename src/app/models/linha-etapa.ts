@@ -5,14 +5,16 @@ export interface LinhaEtapa {
     intEmpresaId?: number;
     ofcOrcamentoId?: number;
     ofcOrdemServicoId?: number;
-    ofcLinhaEtapaFaseId?: number;
-    ofcLinhaEtapaId?: number;
+    ofcLinhaetapaFaseId?: number;
+    ofcLinhaetapaId?: number;
     dataHoraInicio?: Date;
-    linhaetapaFase?: LinhaEtapaFase[];
+    ofcLinhaetapaFase?: LinhaEtapaFase[];
     dataHoraFim?: Date;
     observacao?: string;
     situacao?: number;
     subetapa: boolean;
     logInicioPctUsuarioId?: number;
     logFimPctUsuarioId?: number;
+
+    action?: string
 }
