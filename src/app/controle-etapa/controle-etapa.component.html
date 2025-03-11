@@ -27,14 +27,96 @@
                     </div>
                 </div>
 
+                <app-dialog-base [titulo]="dadosDialog.titulo" [(visible)]="dialogVisible">
+                    <ng-container [ngSwitch]="dadosDialog.titulo">
+                        <div *ngSwitchCase="'Equipamento'" class="equipamento-dialog">
+                            {{ modelo.ofcEquipamento | json }}
+                            <div class="grid-container">
+                                <div class="input-group">
+                                    <label for="codigo">Código</label>
+                                    <input pInputText id="codigo" 
+                                           [(ngModel)]="modelo.ofcEquipamento.codigo" 
+                                           [disabled]="true"/>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label for="modelo">Modelo</label>
+                                    <input pInputText id="modelo" 
+                                           [(ngModel)]="modelo.ofcEquipamento.modelo" 
+                                           [disabled]="true"/>
+                                </div>
+                        
+                                <div class="input-group">
+                                    <label for="serie">Série</label>
+                                    <input pInputText id="serie" 
+                                           [(ngModel)]="modelo.ofcEquipamento.serie" 
+                                           [disabled]="true"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="tag">TAG</label>
+                                    <input pInputText id="tag" 
+                                           [(ngModel)]="modelo.ofcEquipamento.tag" 
+                                           [disabled]="true"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="rede">Rede</label>
+                                    <input pInputText id="rede" 
+                                           [(ngModel)]="modelo.ofcEquipamento.rede" 
+                                           [disabled]="true"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="frequencia">Frequencia</label>
+                                    <input pInputText id="frequencia" 
+                                           [(ngModel)]="modelo.ofcEquipamento.frequencia" 
+                                           [disabled]="true"/>
+                                </div>
+                                <div class="input-group">
+                                    <label for="dataFabricacao">Data de Fabricação</label>
+                                    <input pInputText id="dataFabricacao" 
+                                           [value]="formatarData(modelo.ofcEquipamento.dataFabricacao ?? '')"
+                                           dateFormat="dd.mm.yy"
+                                           [disabled]="true"/>
+                                </div>
+                                <div class="input-group">
+                                    <label for="oficinaTipoEquipamento">Tipo Equipamento</label>
+                                    <input pInputText id="oficinaTipoEquipamento" 
+                                           [(ngModel)]="modelo.ofcEquipamento.oficinaTipoEquipamento.descricao" 
+                                           [disabled]="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'Cliente'" class="equipamento-dialog">
+                            {{ modelo.cliente | json }}
+                            <div class="grid-container">
+                                <div class="input-group">
+                                    <label for="username">Razão Social</label>
+                                    <input pInputText id="username" aria-describedby="username-help" [(ngModel)]="modelo.cliente.razaoSocial" [disabled]="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'Info. Complementares'" class="equipamento-dialog">
+                            <div class="grid-container">
+                                <div class="input-group">
+                                    <label for="username">Problema Relatado</label>
+                                    <textarea rows="10"cols="105" pTextarea [disabled]="true" [(ngModel)]="modelo.condicoes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'Anexos'" class="equipamento-dialog"></div>
+                      </ng-container>
+                </app-dialog-base>
+
                 <div class="info-card">
-                    <app-info-card imgClass="engine" class="marg-left" icon="assets/images/engine.png" titulo="Equipamento"></app-info-card>
-                    <app-info-card imgClass="client" icon="assets/images/cliente.png" titulo="Cliente"></app-info-card>
+                    <app-info-card imgClass="engine" class="marg-left" icon="assets/images/engine.png" titulo="Equipamento" (click)="abrirDialog('equipamento')"></app-info-card>
+                    <app-info-card imgClass="client" icon="assets/images/cliente.png" titulo="Cliente" (click)="abrirDialog('cliente')"></app-info-card>
                 </div>
 
                 <div class="info-card">
-                    <app-info-card imgClass="info" class="marg-left" icon="assets/images/info.png" titulo="Info. complementares"></app-info-card>
-                    <app-info-card icon="assets/images/galeria.png" titulo="Anexos"></app-info-card>
+                    <app-info-card imgClass="info" class="marg-left" icon="assets/images/info.png" titulo="Info. complementares" (click)="abrirDialog('infoComplementar')"></app-info-card>
+                    <app-info-card icon="assets/images/galeria.png" titulo="Anexos" (click)="abrirDialog('anexo')"></app-info-card>
                 </div>
 
                 <div class="d-flex flex-wrap justify-content-center mt-3">

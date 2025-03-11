@@ -21,6 +21,12 @@ export class ControleEtapaComponent implements OnInit {
   etapaIniciada: boolean = false;
   linhaEtapa: LinhaEtapa | undefined;
   informacoes: { campo1: any, valor1: any, campo2: any, valor2: any }[] = [];
+  dialogVisible: boolean = false;
+  dialogAberto: string | null = null;
+  dadosDialog: any = {
+    titulo: '',
+    conteudo: {}
+  };
 
   constructor(private router: Router, 
     private etapaService: EtapaService,
@@ -52,6 +58,29 @@ export class ControleEtapaComponent implements OnInit {
         detail: 'Não foi possível identificar o tipo de equipamento.',
       });
     }
+  }
+
+  formatarData(data: Date | string | null | undefined): string {
+    return this.datePipe.transform(data || new Date(), 'dd/MM/yyyy')!;
+  }
+  
+  abrirDialog(tipo: string) {
+    this.dadosDialog.titulo = '';
+    switch(tipo) {
+      case 'equipamento':
+        this.dadosDialog.titulo = 'Equipamento';
+        break;
+      case 'cliente':
+        this.dadosDialog.titulo = 'Cliente';
+        break;
+      case 'infoComplementar':
+        this.dadosDialog.titulo = 'Info. Complementares';
+        break;
+      case 'anexo':
+        this.dadosDialog.titulo = 'Anexos';
+        break;
+    }
+    this.dialogVisible = true;
   }
 
   voltar() {

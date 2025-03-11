@@ -12,6 +12,10 @@ import { ControleEtapaRoutingModule } from './controle-etapa-routing.module';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ChipsModule } from 'primeng/chips';
 import { SharedModule } from '../components/shared.module';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogBaseComponent } from '../components/dialog/dialog-base.component';
+// import { TextareaModule } from 'primeng/textarea';
 
 @NgModule({
     imports: [
@@ -25,9 +29,11 @@ import { SharedModule } from '../components/shared.module';
         ButtonModule,
         ControleEtapaRoutingModule,
         ChipsModule,
-        SharedModule
+        SharedModule,
+        DialogModule,
+        DynamicDialogModule
     ],
-    declarations: [ControleEtapaComponent],
+    declarations: [ControleEtapaComponent, DialogBaseComponent],
     providers: [DialogService, DatePipe]
 })
 export class ControleEtapaModule { }

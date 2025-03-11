@@ -9,6 +9,60 @@ html, body {
     background-color: var(--primary-color);
 }
 
+app-info-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+app-info-card:hover {
+    transform: scale(1.02);
+}
+
+.equipamento-dialog {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+
+        .input-group {
+            margin-bottom: 0;
+
+            label {
+                display: block;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+                color: var(--gray-700);
+                font-size: 0.875rem;
+            }
+
+            input[pInputText] {
+                width: 100%;
+                background-color: var(--surface-50);
+                border: 1px solid var(--surface-300);
+                border-radius: 6px;
+                padding: 0.75rem;
+                font-size: 1rem;
+    
+                &:disabled {
+                    background-color: var(--surface-100);
+                    border-color: var(--surface-200);
+                    color: var(--surface-600);
+                    cursor: not-allowed;
+                }
+    
+                &:focus {
+                    box-shadow: 0 0 0 2px var(--primary-color-200);
+                    border-color: var(--primary-color);
+                }
+            }
+        }
+    }
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
